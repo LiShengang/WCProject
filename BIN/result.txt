@@ -1,3 +1,0 @@
-abcde.c, 字符数: 14
-abcde.c, 单词数: 4
-abcde.c, 行数: 2
