@@ -1,3 +1,4 @@
+//这里是WordCount的基本功能代码
 package wordcount;
 import java.io.*;
 
