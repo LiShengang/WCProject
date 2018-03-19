@@ -1,0 +1,159 @@
+package wordcount;
+import java.io.*;
+
+
+public class WordCount {
+	public static int chars = 0;
+    public static int words = 0;
+    public static int lines = 0;
+   
+    public static void wcount(InputStreamReader isr)
+        throws IOException {
+        int c = 0;
+        boolean lastWhite = true;
+        String whiteSpace = " \t\n\r,";
+       
+        while((c = isr.read()) != -1) {
+            //count characters
+        	if(c!='\r')
+        	{
+            chars++;
+        	}
+            //count lines
+            if(c == '\n') {
+                lines++;
+            }
+            //count words
+            int index = whiteSpace.indexOf(c);
+            if(index == -1) {
+                if(lastWhite == true) {
+                    words++;
+                    lastWhite = false;
+                }
+            }
+            else
+                lastWhite = true;
+         }
+        if(chars != 0)
+            lines++;
+       
+       
+      }
+ 
+    public static void clear() {
+        chars = 0;
+        words = 0;
+        lines = 0;
+    }
+    public static void main(String[] args) {
+        // TODO code application logic here
+        FileReader fr;
+       int flag1=-1;
+       int flag2=-1;
+       int flag3=-1;
+     //  int count=0;
+       int ch=0;
+       int wo=0;
+       int li=0;
+       int dis=0;
+        for(int i = 0;i<args.length;i++)
+        {
+        	switch(args[i])
+        	{
+        	 case "-o":dis=1;break;
+        	 //case "-e":dis=2;break;
+        	 default: break;
+        	}
+        	//if(args[i]=="-o") dis=1;
+        	//if(args[i]=="-e") dis=2;
+        	if(args[i].endsWith(".c"))
+        	flag1=i;
+        	if(args[i].endsWith(".txt"))
+        	{
+        		if(dis==1)flag2=i;
+        		//if(dis==2)flag3=i;
+        		
+        	}
+        }
+        try {
+            if(args.length == 0) {
+                //handle with stdin
+                wcount(new InputStreamReader(System.in));
+            }
+            else 
+            {
+            	System.out.println(args[flag1] +":");
+                //handle with a list of files
+              //  for(int i = 0;i<args.length;i++) 
+               // {
+            	    
+                   // fr = new FileReader(args[1]);
+                  //  wcount(fr);
+            	fr = new FileReader(args[flag1]);
+                wcount(fr);
+                FileOutputStream fs =new FileOutputStream(new File("result.txt"));
+                PrintStream p =new PrintStream(fs);
+             //   File file = new File("result.txt");
+             //   BufferedWriter bw=new BufferedWriter(new FileWriter(file,true));
+          //      FileWriter output =new FileWriter("result.txt",true);
+            	for(int i = 0;i<args.length;i++)
+            	{
+                    switch(args[i])
+                    {
+                    case "-c":if(flag1!=-1){System.out.println(" chars: "+chars);ch=1;
+                    p.println( args[flag1]+", 字符数: "+chars);}break;
+                    case "-w":if(flag1!=-1){System.out.println(" words: "+words);wo=1;
+                    p.println(args[flag1]+", 单词数: "+words);}break;
+                    case "-l":if(flag1!=-1){System.out.println(" lines: "+lines);li=1;
+                    p.println(args[flag1]+", 行数: "+lines);}break;
+                    case "-o":
+                    	if(flag1!=-1&flag2!=-1)
+                    	{
+                    		 FileOutputStream auto =new FileOutputStream(new File(args[flag2]));
+                             PrintStream pri =new PrintStream(auto);
+                    		if(ch==1)
+                    		{
+                    			//FileWriter out =new FileWriter(args[flag2],true);
+                    			pri.println(args[flag1]+", 字符数: "+chars);
+                    			pri.println("\n");
+                    		}
+                    		if(wo==1)
+                    		{
+                    			//FileWriter out =new FileWriter(args[flag2],true);
+                    			pri.println(args[flag1]+", 单词数: "+words);
+                    			pri.println("\n");
+                    		}
+                    		if(li==1)
+                    		{
+                    			pri.println(args[flag1]+", 行数: "+lines);
+                    			pri.println("\n");
+                    		}
+                    	}
+                    	break;
+                    default: break;
+                    }
+                    
+                //    System.out.println(args[1] +":"+"lines: "+ lines + " words: "+ words +" chars: "+chars);
+                  //  clear();
+            	}  
+            	
+               //  }
+             }
+            /*
+            else
+            {
+            	if(args[args.length-1].endsWith(".txt"))
+            			{
+            		     if(args[0]=="-o")
+            		     {
+            		    	 FileWriter out =new FileWriter(args[args.length-1],true);
+            		    	 out.write("");
+            		     }
+            			}
+            }
+            */
+        }catch(IOException e) {
+            return;
+        }
+    }
+}
