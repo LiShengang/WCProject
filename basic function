@@ -16,7 +16,7 @@ public class WordCount {
        
         while((c = isr.read()) != -1) {
             //count characters
-        	if(c!='\n'&c!='\r')
+        	if(c!='\r')
         	{
             chars++;
         	}
@@ -51,15 +51,30 @@ public class WordCount {
         FileReader fr;
        int flag1=-1;
        int flag2=-1;
+       int flag3=-1;
+     //  int count=0;
        int ch=0;
        int wo=0;
        int li=0;
+       int dis=0;
         for(int i = 0;i<args.length;i++)
         {
+        	switch(args[i])
+        	{
+        	 case "-o":dis=1;break;
+        	 //case "-e":dis=2;break;
+        	 default: break;
+        	}
+        	//if(args[i]=="-o") dis=1;
+        	//if(args[i]=="-e") dis=2;
         	if(args[i].endsWith(".c"))
         	flag1=i;
         	if(args[i].endsWith(".txt"))
-        	flag2=i;
+        	{
+        		if(dis==1)flag2=i;
+        		//if(dis==2)flag3=i;
+        		
+        	}
         }
         try {
             if(args.length == 0) {
@@ -86,16 +101,14 @@ public class WordCount {
             	{
                     switch(args[i])
                     {
-                    case "-c":System.out.println(" chars: "+chars);ch=1;
-                    p.println( args[flag1]+", 字符数: "+chars);break;
-                    case "-w":System.out.println(" words: "+words);wo=1;
-                  //  bw.write(" words: "+words);break;
-                    p.println(args[flag1]+", 单词数: "+words);break;
-                    case "-l":System.out.println(" lines: "+lines);li=1;
-                   // bw.write(" lines: "+lines);break;
-                    p.println(args[flag1]+", 行数: "+lines);break;
+                    case "-c":if(flag1!=-1){System.out.println(" chars: "+chars);ch=1;
+                    p.println( args[flag1]+", 字符数: "+chars);}break;
+                    case "-w":if(flag1!=-1){System.out.println(" words: "+words);wo=1;
+                    p.println(args[flag1]+", 单词数: "+words);}break;
+                    case "-l":if(flag1!=-1){System.out.println(" lines: "+lines);li=1;
+                    p.println(args[flag1]+", 行数: "+lines);}break;
                     case "-o":
-                    	if(flag2!=-1)
+                    	if(flag1!=-1&flag2!=-1)
                     	{
                     		 FileOutputStream auto =new FileOutputStream(new File(args[flag2]));
                              PrintStream pri =new PrintStream(auto);
