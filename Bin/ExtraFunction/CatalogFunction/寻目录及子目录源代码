@@ -1,0 +1,279 @@
+package wc;
+import java.io.*;
+import java.util.*;
+public class WC {
+	public static int chars = 0;
+    public static int words = 0;
+    public static int lines = 0;
+    public static int chaarray[]=new int[100];
+    public static int worarray[]=new int[100];
+    public static int linarray[]=new int[100];
+    public static String[] result= new String[1000];
+    public static String[] stoparray= new String[100];
+    public static String[] filearray= new String[100];
+    public static int sum1 = 0;
+    public static int sum2 = 0;
+    public static int filenum = 0;
+    public static int catalog=0;
+    public static int tip=0;
+    public static File dir= new File(".");
+    public static String tongpeifu="";
+    //ArrayList<String> list = new ArrayList<String>();
+    public static void wcount(InputStreamReader isr)
+        throws IOException {
+        int c = 0;
+        String results = "";
+        
+     //   int sum=0;
+        boolean lastWhite = true;
+        String whiteSpace = " \t\n\r,";
+        
+        while((c = isr.read()) != -1) {
+            //count characters
+        	
+        	if(c!='\n'&c!='\r')
+        	{
+            chars++;
+        	}
+            //count lines
+            if(c == '\n') {
+                lines++;
+            }
+            //count words
+            int index = whiteSpace.indexOf(c);
+            if(index == -1) {
+                if(lastWhite == true) {
+                    words++;
+                    lastWhite = false;
+                }
+                    results += (char)c;
+                
+            }
+            else
+             {
+                lastWhite = true;
+               // char[] results1 = results.toCharArray();
+                result[sum1]=results;//出现单词分隔符时将之前的单词统计在result[]数组中
+                results ="";
+                sum1++;
+             }
+         }
+        if(c==-1){result[sum1]=results;results ="";sum1++;}
+        if(chars != 0)
+            lines++;
+      }
+    
+    public static void stop(InputStreamReader isr)
+            throws IOException {
+            int c = 0;
+            String results = "";
+            
+          //  int sum=0;
+            boolean lastWhite = true;
+            String whiteSpace = " \t\n\r,";
+            
+            while((c = isr.read()) != -1) 
+            {
+            	 int index = whiteSpace.indexOf(c);
+                 if(index == -1) {
+                     if(lastWhite == true) {
+                        // words++;
+                         lastWhite = false;
+                     }
+                         results += (char)c;
+                     
+                 }
+                 else
+                 {
+                     lastWhite = true;
+                     stoparray[sum2]=results;//出现单词分隔符时将之前的单词统计在result[]数组中
+                     results ="";
+                     sum2++;
+                 }
+             }
+             if(c==-1){stoparray[sum2]=results;results ="";sum2++;}//最后一个单词后面没有分隔符，但也要统计上
+            }
+    
+ 
+    public static void clear() {
+        chars = 0;
+        words = 0;
+        lines = 0;
+    }
+    //递归目录
+    public static void getAllFile(File paramFile,String s,String ss) {  
+        if (paramFile.isFile()) {// 是文件，则添加到文件列表中，本次调用结束  
+        	if(ss!="")
+        	{
+        	if(paramFile.getName().endsWith(ss))
+        	{
+        		clear();
+        		filearray[filenum]= paramFile.getName();
+        	    filenum++;
+        	    FileReader Re;
+        	    try{
+        		Re = new FileReader(s+"/"+paramFile.getName());
+                wcount(Re);
+                worarray[tip]=words;
+                tip++;
+        	    }
+        	    catch(IOException e) {
+                    return;
+                }
+        	}
+        	}
+        	else //不输入*.c时，默认为.c文件
+        	{
+        		if(paramFile.getName().endsWith(".c"))
+            	{
+            		clear();
+            		filearray[filenum]= paramFile.getName();
+            	    filenum++;
+            	    FileReader Re;
+            	    try{
+            		Re = new FileReader(s+"/"+paramFile.getName());
+                    wcount(Re);
+                    worarray[tip]=words;
+                    tip++;
+            	    }
+            	    catch(IOException e) {
+                        return;
+                    }
+            	}	
+        	}
+        } else {// 是目录  
+            File[] localFiles = paramFile.listFiles();// 得到目录下子文件数组  
+            if (localFiles != null) {// 目录不为空  
+                for (File localFile : localFiles) {//遍历子文件数组  
+                    getAllFile( localFile,paramFile.getName(),ss);//调用该函数本身  
+                }  
+            }  
+            // 为空目录，本次调用结束  
+        }  
+      
+    }  
+
+    public static void main(String[] args) {
+        // TODO code application logic here
+        FileReader fr;
+        FileReader Stopfr;
+        int can=0;
+        int dis=0;
+        int flag1=-1;
+        int flag2=-1;
+        int flag3=-1;
+        int mmm=0;
+        int creplace=0;
+        String noneed="";
+       
+        for(int i = 0;i<args.length;i++)
+        {
+        	switch(args[i])
+        	{
+        	 case "-o":dis=1;break;
+        	 case "-e":dis=2;break;
+        	 default: break;
+        	}
+        	//if(args[i].endsWith(".c"))
+        	//flag1=i;
+        	int m2m=-1;
+        	char arr[]=args[i].toCharArray();
+        	for(int t=0;t<arr.length;t++)
+        	{
+        	if(arr[t]=='*')  mmm=1;
+        	if(arr[t]=='.'&mmm==1) { m2m=t;}
+        	//if(arr[t]=='c'&creplace==1) {tongpeifu =".c";break;}
+        	if(arr[t]=='.'&mmm==0)  {flag1=i;}
+        	if(m2m!=-1) tongpeifu += arr[t];
+        	}
+        	//{
+        	//while(m2m<arr.length)
+        	//{	
+        	//tongpeifu += arr[m2m];
+        	//m2m++;
+        	//}
+        	//}
+        	//if(args[i].endsWith("*"+tongpeifu)) tongpeifu=".c";
+        	if(args[i].endsWith(".txt"))
+        	{
+        		if(dis==1)flag2=i;
+        		if(dis==2)flag3=i;
+        		
+        	}
+        }
+        try {
+            if(args.length == 0) {
+                //handle with stdin
+                wcount(new InputStreamReader(System.in));
+            }
+            else 
+            {
+            	//System.out.println(args[flag1] +":");
+                //handle with a list of files
+              //  for(int i = 0;i<args.length;i++) 
+               // {
+            	    
+                   // fr = new FileReader(args[1]);
+                  //  wcount(fr);
+            	if(flag1!=-1)
+            	{
+            	fr = new FileReader(args[flag1]);
+                wcount(fr);
+            	}
+                if(flag3!=-1)
+                {
+                Stopfr = new FileReader(args[flag3]);
+                stop(Stopfr);
+                }
+                FileOutputStream fs =new FileOutputStream(new File("result.txt"));
+                PrintStream p =new PrintStream(fs);
+                int wor =0;
+                int cha =0;
+                int lin =0;
+           //     File dir= new File(".");
+                
+                for(int i = 0;i<args.length;i++)
+            	{
+                	switch(args[i])
+                	{
+                	case "-w":wor=1;if(flag1!=-1&flag3==-1)
+                	{System.out.println(" words: "+words);
+                    p.println(args[flag1]+", 单词数: "+words);break;}
+                	else{can=1;break;}
+                	case "-e":if(flag1!=-1&flag3!=-1)
+                	{
+                		if(can==1)
+                	  {
+                		for(int x = 0;x<sum1;x++)
+                			for(int y = 0;y<sum2;y++)
+                		       {	
+                				//System.out.println(result[x]);
+                				//System.out.println(stoparray[y]);
+                		        if(result[x].equals(stoparray[y])==true)words--;
+                		       }
+                	  System.out.println(" words: "+words);
+                      p.println(args[flag1]+", 单词数: "+words);
+                      }
+                	 }break;
+                	case "-s":catalog = 1;getAllFile(dir,noneed,tongpeifu);break;
+                	default: break;
+                   } 	
+                }
+                if(catalog==1)
+                for(int s=0;s<filenum;s++)
+            	{
+            		if(wor==1)
+            			p.println(filearray[s]+", 单词数: "+worarray[s]);
+            		else if(cha==1)
+            			p.println(filearray[s]+", 字符数: "+chaarray[s]);
+            		else if(lin==1)
+            			p.println(filearray[s]+", 行数: "+linarray[s]);
+            	}
+             //   p.println("tongpeifu"+":"+tongpeifu);	
+                	
+            }
+        }catch(IOException e) {
+            return;
+        }
+    }
+}
