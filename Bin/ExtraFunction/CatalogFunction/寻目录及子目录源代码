@@ -1,7 +1,7 @@
-package wc;
+package catalog;
 import java.io.*;
 import java.util.*;
-public class WC {
+public class Catalog {
 	public static int chars = 0;
     public static int words = 0;
     public static int lines = 0;
