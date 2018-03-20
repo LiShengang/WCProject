@@ -9,9 +9,9 @@ public class WordCountCla {
     public static int worarray[]=new int[100];
     public static int linarray[]=new int[100];
     public static int emptylinearray[]=new int[100];
-    public static String[] result= new String[1000];
+    public static String[] result= new String[10000];
     public static String[] stoparray= new String[100];
-    public static String[][] finalarray= new String[1000][1000];
+    public static String[][] finalarray= new String[1000][10000];
     public static int finalresult[]= new int[1000];
     public static String[] filearray= new String[100];
     public static int sum1 = 0;
@@ -295,32 +295,36 @@ public class WordCountCla {
                 	case "-o":
                     	if(flag1!=-1&flag2!=-1)
                     	{
-                    		 FileOutputStream auto =new FileOutputStream(new File(args[flag2]));
-                             PrintStream pri =new PrintStream(auto);
+                    		// FileOutputStream auto =new FileOutputStream(new File(args[flag2]));
+                            // PrintStream pri =new PrintStream(auto);
                     		if(cha==1)
                     		{
                     			//FileWriter out =new FileWriter(args[flag2],true);
                     			System.out.println(args[flag1]+", 字符数: "+chars);
-                    			pri.println(args[flag1]+", 字符数: "+chars);
+                    			pri1.println(args[flag1]+", 字符数: "+chars);
+                    			cha=0;
                     			//pri.println("\n");
                     		}
                     		if(wor==1&flag3==-1)
                     		{
                     			//FileWriter out =new FileWriter(args[flag2],true);
                     			System.out.println(args[flag1]+", 单词数: "+words);
-                    			pri.println(args[flag1]+", 单词数: "+words);
+                    			pri1.println(args[flag1]+", 单词数: "+words);
+                    			wor=0;
                     			//pri.println("\n");
                     		}
                     		if(lin==1)
                     		{
                     			System.out.println(args[flag1]+", 行数: "+lines);
-                    			pri.println(args[flag1]+", 行数: "+lines);
+                    			pri1.println(args[flag1]+", 行数: "+lines);
+                    			lin=0;
                     			//pri.println("\n");
                     		}
                     		if(emptya==1) 
                     			{
                     			System.out.println(args[flag1]+", 空行数: "+emptyline);
-                    			pri.println(args[flag1]+", 空行数: "+emptyline);
+                    			pri1.println(args[flag1]+", 空行数: "+emptyline);
+                    			emptya=0;
                     			}
                     	}
                     	break;
@@ -345,19 +349,21 @@ public class WordCountCla {
                 	 }
                        if(flag2!=-1) 
                     	  {
-                    	    FileOutputStream auto =new FileOutputStream(new File(args[flag2]));
-                            PrintStream pri =new PrintStream(auto);
-                            System.out.println(args[flag1]+", 字符数: "+chars);
-                            pri.println(args[flag1]+", 字符数: "+chars);
+                    	    //FileOutputStream auto =new FileOutputStream(new File(args[flag2]));
+                            //PrintStream pri =new PrintStream(auto);
+                            //System.out.println(args[flag1]+", 字符数: "+chars);
+                           // pri.println(args[flag1]+", 字符数: "+chars);
                             System.out.println(args[flag1]+", 去除停用词后的单词数: "+words);
-                    	    pri.println(args[flag1]+", 去除停用词后的单词数: "+words);
-                    	    System.out.println(args[flag1]+", 行数: "+lines);
-                    	    pri.println(args[flag1]+", 行数: "+lines);
+                    	    pri1.println(args[flag1]+", 去除停用词后的单词数: "+words);
+                    	   // System.out.println(args[flag1]+", 行数: "+lines);
+                    	  //  pri.println(args[flag1]+", 行数: "+lines);
+                    	   /*
                     	    if(emptya==1) 
                     	    	{
                     	    	System.out.println(args[flag1]+", 空行数: "+emptyline);
                     	    	pri.println(args[flag1]+", 空行数: "+emptyline);
                     	    	}
+                    	    */
                     	  }
                       }
                 	 }break;
