@@ -1,0 +1,61 @@
+//测试脚本源代码，直接运行testscript.exe即可，可以看到测试用例的输出结果
+package testscript;
+import java.io.*;
+import java.util.Scanner;
+public class TestScript {
+	public static String[]lines = new String[100];
+	public static int c=0;
+	//public static String cmd = "wc.exe -c test.c";
+	public static void testscript()throws IOException
+	{
+		
+		String line = null;
+		File dir =new File("testscript.txt");
+		BufferedReader buf =new BufferedReader(new FileReader(dir));
+		while((line=buf.readLine())!=null)
+		{
+			lines[c]=line;
+			c++;
+		}
+	}
+	public static void main(String[] args) 
+	{
+		
+	 	try
+	 	{
+	 		testscript();
+	 		  String lineStr;  
+	 		 Runtime runtime;
+	 		Process process;
+	 		BufferedInputStream input;
+	 		BufferedReader inBr ;
+	 	 for(int i=0;i<c;i++)
+	 	  {
+	 		runtime = Runtime.getRuntime();
+	 		process=runtime.exec(lines[i]);
+	 		input = new BufferedInputStream(process.getInputStream());  
+            inBr = new BufferedReader(new InputStreamReader(input));  
+          
+            while ((lineStr = inBr.readLine()) != null)  
+                //获得命令执行后在控制台的输出信息  
+                System.out.println(lineStr);// 打印输出信息  
+            //检查命令是否执行失败。  
+            if (process.waitFor() != 0) {  
+                if (process.exitValue() == 1)//p.exitValue()==0表示正常结束，1：非正常结束  
+                    System.err.println("命令执行失败!");  
+            }  
+            inBr.close();  
+            input.close(); 
+	 	  }
+            while(true)
+            {
+            	Scanner in=new Scanner(System.in);
+                int x=in.nextInt();
+                if(x=='\r') break;
+            }
+	 		//Runtime.getRuntime().exec("E:/WordCount/AV@20_27677.exe");
+	 	 
+	 	}
+	 	catch(Exception e){e.printStackTrace();}
+	}
+}
