@@ -1,0 +1,18 @@
+wc.exe -c test.c
+wc.exe -c -w test.c
+wc.exe -c -w -l test.c
+wc.exe -c -w -l test.c -o output.txt
+wc.exe -c -w -l test.c -e stopList.txt
+wc.exe -c -w -l test.c -o output.txt -e stopList.txt
+wc.exe -c -w -l -a testfile.c
+wc.exe -c -w -l -a testfile.c -o output.txt
+wc.exe -c -w -l -a testfile.c -e stopList.txt
+wc.exe -c -w -l -a testfile.c -o output.txt -e stopList.txt
+wc.exe -c -w -l -s *.c
+wc.exe -c -w -l -s *.c -o output.txt
+wc.exe -c -w -l -s *.c -e stopList.txt
+wc.exe -c -w -l -s *.c -o output.txt -e stopList.txt
+wc.exe -c -w -l -a -s *.c
+wc.exe -c -w -l -a -s *.c -o output.txt
+wc.exe -c -w -l -a -s *.c -e stopList.txt
+wc.exe -c -w -l -a -s *.c -o output.txt -e stopList.txt
