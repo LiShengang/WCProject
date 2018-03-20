@@ -277,17 +277,21 @@ public class WordCountCla {
                 	{
                 	case "-c":cha=1;if(flag1!=-1&flag2==-1)
                 	{
-                		//System.out.println(" chars: "+chars);
+                	System.out.println(args[flag1]+", 字符数: "+chars);
                     p.println( args[flag1]+", 字符数: "+chars);}break;
                 	case "-w":wor=1;if(flag1!=-1&flag3==-1&flag2==-1)
-                	{//System.out.println(" words: "+words);
+                	{System.out.println(args[flag1]+", 单词数: "+words);
                     p.println(args[flag1]+", 单词数: "+words);break;}
                 	else{can=1;break;}
                 	case "-l":lin=1;if(flag1!=-1&flag2==-1)
                 	{
-                		//System.out.println(" lines: "+lines);
+                		System.out.println(args[flag1]+", 行数: "+lines);
                     p.println(args[flag1]+", 行数: "+lines);}break;
-                	case "-a":if(flag1!=-1&flag2==-1)p.println(args[flag1]+", 空行数: "+emptyline);
+                	case "-a":if(flag1!=-1&flag2==-1)
+                	{
+                		System.out.println(args[flag1]+", 空行数: "+emptyline);
+                		p.println(args[flag1]+", 空行数: "+emptyline);	
+                	}
                 	case "-o":
                     	if(flag1!=-1&flag2!=-1)
                     	{
@@ -296,21 +300,28 @@ public class WordCountCla {
                     		if(cha==1)
                     		{
                     			//FileWriter out =new FileWriter(args[flag2],true);
+                    			System.out.println(args[flag1]+", 字符数: "+chars);
                     			pri.println(args[flag1]+", 字符数: "+chars);
                     			//pri.println("\n");
                     		}
                     		if(wor==1&flag3==-1)
                     		{
                     			//FileWriter out =new FileWriter(args[flag2],true);
+                    			System.out.println(args[flag1]+", 单词数: "+words);
                     			pri.println(args[flag1]+", 单词数: "+words);
                     			//pri.println("\n");
                     		}
                     		if(lin==1)
                     		{
+                    			System.out.println(args[flag1]+", 行数: "+lines);
                     			pri.println(args[flag1]+", 行数: "+lines);
                     			//pri.println("\n");
                     		}
-                    		if(emptya==1) pri.println(args[flag1]+", 空行数: "+emptyline);
+                    		if(emptya==1) 
+                    			{
+                    			System.out.println(args[flag1]+", 空行数: "+emptyline);
+                    			pri.println(args[flag1]+", 空行数: "+emptyline);
+                    			}
                     	}
                     	break;
                 	case "-e":if(flag1!=-1&flag3!=-1)
@@ -328,6 +339,7 @@ public class WordCountCla {
                 	 if(flag2==-1) 
                 	 {
                 	 // p.println(args[flag1]+", 字符数: "+chars);
+                		 System.out.println(args[flag1]+", 去除停用词后的单词数: "+words);
                       p.println(args[flag1]+", 去除停用词后的单词数: "+words);
                     //  p.println(args[flag1]+", 行数: "+lines);
                 	 }
@@ -335,10 +347,17 @@ public class WordCountCla {
                     	  {
                     	    FileOutputStream auto =new FileOutputStream(new File(args[flag2]));
                             PrintStream pri =new PrintStream(auto);
+                            System.out.println(args[flag1]+", 字符数: "+chars);
                             pri.println(args[flag1]+", 字符数: "+chars);
+                            System.out.println(args[flag1]+", 去除停用词后的单词数: "+words);
                     	    pri.println(args[flag1]+", 去除停用词后的单词数: "+words);
+                    	    System.out.println(args[flag1]+", 行数: "+lines);
                     	    pri.println(args[flag1]+", 行数: "+lines);
-                    	    if(emptya==1) pri.println(args[flag1]+", 空行数: "+emptyline);
+                    	    if(emptya==1) 
+                    	    	{
+                    	    	System.out.println(args[flag1]+", 空行数: "+emptyline);
+                    	    	pri.println(args[flag1]+", 空行数: "+emptyline);
+                    	    	}
                     	  }
                       }
                 	 }break;
@@ -354,24 +373,50 @@ public class WordCountCla {
                 	if(flag2==-1&flag3==-1)
                 	{
                 	if(cha==1)
+                	{
+                		System.out.println(filearray[s]+", 字符数: "+chaarray[s]);
                 		p.println(filearray[s]+", 字符数: "+chaarray[s]);
+                	}
             		if(wor==1)
+            		{
+            			System.out.println(filearray[s]+", 单词数: "+worarray[s]);
             			p.println(filearray[s]+", 单词数: "+worarray[s]);
+            		}
             		if(lin==1)
+            		{
+            			System.out.println(filearray[s]+", 行数: "+linarray[s]);
             			p.println(filearray[s]+", 行数: "+linarray[s]);
-            		if(emptya==1) p.println(filearray[s]+", 空行数: "+emptylinearray[s]);
+            		}
+            		if(emptya==1) 
+            		{
+            			System.out.println(filearray[s]+", 空行数: "+emptylinearray[s]);
+            			p.println(filearray[s]+", 空行数: "+emptylinearray[s]);
+            		}
                 	}
                 	if(flag2!=-1&flag3==-1)
                 	{
                 		//FileOutputStream auto1 =new FileOutputStream(new File(args[flag2]));
                        // PrintStream pri1 =new PrintStream(auto1);
                 	  	if(cha==1)
+                	  	{
+                	  	  System.out.println(filearray[s]+", 字符数: "+chaarray[s]);
                       	  pri1.println(filearray[s]+", 字符数: "+chaarray[s]);
+                	  	}
                 		if(wor==1)
+                		{
+                		  System.out.println(filearray[s]+", 单词数: "+worarray[s]);
                     	  pri1.println(filearray[s]+", 单词数: "+worarray[s]);	
+                		}
                     	if(lin==1)
-                    	  pri1.println(filearray[s]+", 行数: "+linarray[s]);     
-                    	if(emptya==1) pri1.println(filearray[s]+", 空行数: "+emptylinearray[s]);
+                    	{
+                    	  System.out.println(filearray[s]+", 行数: "+linarray[s]); 
+                    	  pri1.println(filearray[s]+", 行数: "+linarray[s]);  
+                    	}
+                    	if(emptya==1) 
+                    	{
+                    		System.out.println(filearray[s]+", 空行数: "+emptylinearray[s]);
+                    		pri1.println(filearray[s]+", 空行数: "+emptylinearray[s]);
+                    	}
                 	}
                 	if(flag2==-1&flag3!=-1)
                 	{
@@ -382,12 +427,25 @@ public class WordCountCla {
                 		        if(finalarray[s][x].equals(stoparray[y])==true)worarray[s]--;
                 		       }
                 		if(cha==1)
+                		{
+                			System.out.println(filearray[s]+", 字符数: "+chaarray[s]);
                 			p.println(filearray[s]+", 字符数: "+chaarray[s]);
+                		}
                 		if(wor==1)
+                		{
+                			System.out.println(filearray[s]+", 去除停用词后的单词数: "+worarray[s]);
                 			p.println(filearray[s]+", 去除停用词后的单词数: "+worarray[s]);
+                		}
                 		if(lin==1)
+                		{
+                			System.out.println(filearray[s]+", 行数: "+linarray[s]);
                 			p.println(filearray[s]+", 行数: "+linarray[s]);
-                		if(emptya==1) p.println(filearray[s]+", 空行数: "+emptylinearray[s]);
+                		}
+                		if(emptya==1)
+                		{ 
+                			System.out.println(filearray[s]+", 空行数: "+emptylinearray[s]);
+                			p.println(filearray[s]+", 空行数: "+emptylinearray[s]);
+                		}
                 		
                     }
                 	if(flag2!=-1&flag3!=-1)
@@ -403,12 +461,25 @@ public class WordCountCla {
                 		//FileOutputStream auto1 =new FileOutputStream(new File(args[flag2]));
                         //PrintStream pri1 =new PrintStream(auto1);
                 		if(cha==1)
+                		{
+                			System.out.println(filearray[s]+", 字符数: "+chaarray[s]);
                 			pri1.println(filearray[s]+", 字符数: "+chaarray[s]);	
+                		}
                 		if(wor==1)
+                		{
+                			System.out.println(filearray[s]+", 去除停用词后的单词数: "+worarray[s]);
                 			pri1.println(filearray[s]+", 去除停用词后的单词数: "+worarray[s]);
+                		}
                 		if(lin==1)
+                		{
+                			System.out.println(filearray[s]+", 行数: "+linarray[s]);
                 			pri1.println(filearray[s]+", 行数: "+linarray[s]);
-                		if(emptya==1) pri1.println(filearray[s]+", 空行数: "+emptylinearray[s]);
+                		}
+                		if(emptya==1)
+                		{
+                			System.out.println(filearray[s]+", 空行数: "+emptylinearray[s]);
+                			pri1.println(filearray[s]+", 空行数: "+emptylinearray[s]);
+                		}
                     }
                 	
             	}
