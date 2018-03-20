@@ -1,3 +1,4 @@
+//此部分功能没有在屏幕上输出，不过结果都已经保存在默认文件result.txt里了
 package catalog;
 import java.io.*;
 import java.util.*;
