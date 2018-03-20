@@ -47,6 +47,7 @@ public class WordCountCla {
             //count lines
             if(c == '\n') {
                 lines++;
+                charnum=0;
                 if(noempty==0)emptyline++;else noempty=0;
             }
             //count words
@@ -70,7 +71,11 @@ public class WordCountCla {
                 sum1++;
              }
     }
-        if(c==-1){result[sum1]=results;results ="";sum1++;}
+        if(c==-1)
+        {
+        result[sum1]=results;results ="";sum1++;charnum=0;
+        if(noempty==0)emptyline++;else noempty=0;
+        }
         if(chars != 0)
             lines++;
       }
