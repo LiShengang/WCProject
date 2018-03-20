@@ -1,4 +1,4 @@
-//这里是WordCount的基本功能代码
+//这里是WordCount的基本功能代码，在屏幕上显示数据的格式没做调整，在存储结果的文件中格式按规定已经做了调整。
 package wordcount;
 import java.io.*;
 
