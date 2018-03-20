@@ -1,3 +1,4 @@
+//屏幕显示数据时格式还没做调整，不过保存在默认文件result.txt里时，格式已做了相应的调整。
 package stoplist;
 import java.io.*;
 import java.util.*;
