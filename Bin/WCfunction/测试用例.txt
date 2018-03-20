@@ -1,0 +1,19 @@
+//测试用例:打开cmd,在命令行上输入以下格式的测试用例
+1.wc.exe -c test.c
+2.wc.exe -c -w test.c
+3.wc.exe -c -w -l test.c
+4.wc.exe -c -w -l test.c -o output.txt
+5.wc.exe -c -w -l test.c -e stopList.txt
+6.wc.exe -c -w -l test.c -o output.txt -e stopList.txt
+7.wc.exe -c -w -l -a testfile.c
+8.wc.exe -c -w -l -a testfile.c -o output.txt
+9.wc.exe -c -w -l -a testfile.c -e stopList.txt
+10.wc.exe -c -w -l -a testfile.c -o output.txt -e stopList.txt
+11.wc.exe -c -w -l -s *.c
+12.wc.exe -c -w -l -s *.c -o output.txt
+13.wc.exe -c -w -l -s *.c -e stopList.txt
+14.wc.exe -c -w -l -s *.c -o output.txt -e stopList.txt
+15.wc.exe -c -w -l -a -s *.c
+16.wc.exe -c -w -l -a -s *.c -o output.txt
+17.wc.exe -c -w -l -a -s *.c -e stopList.txt
+18.wc.exe -c -w -l -a -s *.c -o output.txt -e stopList.txt
